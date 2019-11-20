@@ -9,3 +9,5 @@ __pycache__/
 ExampleServer/node_modules/
 
 ExampleServer
+
+.DS_Store
