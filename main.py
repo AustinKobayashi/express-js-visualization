@@ -1,8 +1,8 @@
 import router_finder
 import endpoint_finder
 
-symbol_table = dict([('app', 'express()'), ('router', 'express.Router()')])
-
+# need to grab this dynamically (e.g. express() is not always assigned to 'app')
+symbol_table = dict([('app', 'express()')])
 
 def main():
     directory = input("Please enter the path to the directory to scan:\n").strip()
