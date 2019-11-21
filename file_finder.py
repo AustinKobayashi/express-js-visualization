@@ -3,15 +3,20 @@ from collections import defaultdict
 paths = {}
 regex = {}
 
-def router_files(file, path, line):
-    if 'Router()' in line:
-        name = re.sub(r'\s?=(.+)|((var|let|const)\s)|\n', '', line)
-        if path not in paths:
-            paths[path] = {}
 
-        if name not in paths[path]:
-            routes = search_router_use(file, name)
-            paths[path][name] = routes
+def router_files(path):
+    with open(path, 'r') as file:
+        for line in file:
+            if 'Router()' in line:
+                name = re.sub(r'\s?=(.+)|((var|let|const)\s)|\n', '', line)
+                print(name)
+                if path not in paths:
+                    paths[path] = {}
+
+                if name not in paths[path]:
+                    routes = search_router_use(file, name)
+                    paths[path][name] = routes
+                    router_files(path)
 
 def find_use(line):
     for key, rx in regex.items():
@@ -36,7 +41,6 @@ def search_router_use(file, name):
             routes[match.group('endpoint_delete')].append('delete')
         if key == 'router_patch':
             routes[match.group('endpoint_delete')].append('delete')
-
     return routes
 
 def build_regex(name):

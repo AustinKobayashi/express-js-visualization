@@ -31,9 +31,10 @@ def parse_line(line):
 
 def parse_file(file_path):
   with open(file_path, 'r') as file:
+
+    file_finder.router_files(file_path)
+    
     for line in file:
-      
-      file_finder.router_files(file, file_path, line)
 
       key, match = parse_line(line)
       # extract endpoint string and respective HTTP method
