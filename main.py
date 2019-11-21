@@ -1,5 +1,6 @@
 import router_finder
 import endpoint_finder
+import file_finder
 
 # need to grab this dynamically (e.g. express() is not always assigned to 'app')
 symbol_table = dict([('app', 'express()')])
@@ -9,6 +10,8 @@ def main():
     file_paths = router_finder.get_js_files(directory)
     endpoint_finder.get_routes(file_paths)
     print(endpoint_finder.endpoints)
+
+    file_finder.get_files(file_paths)
 
 
 if __name__ == "__main__":
