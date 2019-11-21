@@ -1,9 +1,11 @@
-def get_files(file_path):
-    for path in file_path:
-        parse_file(path)
+import re
+paths = {}
 
-def parse_file(path):
-    with open(path, 'r') as file:
-        for line in file:
-            if 'router()' in line:
-                print(line)
+def router_files(file, path, line):
+    if 'Router()' in line:
+        name = re.sub(r'\s?=(.+)|((var|let|const)\s)|\n', '', line)
+        if path not in paths:
+            paths[path] = [name]
+        else:
+            if name not in paths[path]:
+                paths[path].append(name)

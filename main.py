@@ -11,7 +11,7 @@ def main():
     endpoint_finder.get_routes(file_paths)
     print(endpoint_finder.endpoints)
 
-    file_finder.get_files(file_paths)
+    print(file_finder.paths)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 import main
 import re
 from collections import defaultdict
+import file_finder
 
 regex = {}
 # example key value pair
@@ -14,6 +15,7 @@ def get_routes(file_paths):
                 
 def build_regex():
     app_var = list(main.symbol_table.keys())[list(main.symbol_table.values()).index('express()')]
+    print(list(main.symbol_table.keys()), list(main.symbol_table.values()))
 
     regex['app_get'] = re.compile(r'' + re.escape(app_var) + r'\.get\((?:\'|\")(?P<endpoint_get>.+)(?:\'|\"),(.?)')
     regex['app_put'] = re.compile(r'' + re.escape(app_var) + r'\.put\((?:\'|\")(?P<endpoint_put>.+)(?:\'|\"),(.?)')
@@ -31,6 +33,9 @@ def parse_line(line):
 def parse_file(file_path):
   with open(file_path, 'r') as file:
     for line in file:
+      
+      file_finder.router_files(file, file_path, line)
+
       key, match = parse_line(line)
       # extract endpoint string and respective HTTP method
       if key == 'app_get':
