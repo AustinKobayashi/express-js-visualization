@@ -2,8 +2,10 @@ import main
 import re
 from collections import defaultdict
 
+EXPRESS = 'express()'
+
 regex = {
-  'express_app': re.compile(r'(var|const|let)(\s+)(?P<app_var>.+)(\s*)\=(\s*)express\(\)'),
+  'express_app': re.compile(r'(var|const|let)(\s+)(?P<app_var>.+)(\s*)\=(\s*)' + re.escape(EXPRESS)),
 }
 # example key value pair
 # '/database': ['get', 'post']
@@ -57,4 +59,4 @@ def add_symbol(file_path):
       key, match = parse_line(line)
       # find variable names and add to symbol table
       if key == 'express_app':
-        main.symbol_table[match.group('app_var').strip()] = 'express()'
+        main.symbol_table[match.group('app_var').strip()] = EXPRESS
