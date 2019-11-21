@@ -24,7 +24,6 @@ def get_routes(file_paths):
 def build_regex():
   app_var = list(main.symbol_table.keys())[list(main.symbol_table.values()).index('express()')]
 
-
   regex['app_get'] = re.compile(r'' + re.escape(app_var) + r'\.get\((?:\'|\")(?P<endpoint_get>.+)(?:\'|\"),(.?)')
   regex['app_put'] = re.compile(r'' + re.escape(app_var) + r'\.put\((?:\'|\")(?P<endpoint_put>.+)(?:\'|\"),(.?)')
   regex['app_post'] = re.compile(r'' + re.escape(app_var) + r'\.post\((?:\'|\")(?P<endpoint_post>.+)(?:\'|\"),(.?)')
@@ -40,9 +39,10 @@ def parse_line(line):
 
 def get_supported(file_path):
   with open(file_path, 'r') as file:
+
+    file_finder.router_files(file_path)
+    
     for line in file:
-      
-      file_finder.router_files(file, file_path, line)
 
       key, match = parse_line(line)
 
