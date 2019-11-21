@@ -3,7 +3,7 @@ import endpoint_finder
 import file_finder
 
 # need to grab this dynamically (e.g. express() is not always assigned to 'app')
-symbol_table = dict([('app', 'express()')])
+symbol_table = dict()
 
 def main():
     directory = input("Please enter the path to the directory to scan:\n").strip()
