@@ -15,7 +15,6 @@ def get_routes(file_paths):
                 
 def build_regex():
     app_var = list(main.symbol_table.keys())[list(main.symbol_table.values()).index('express()')]
-    print(list(main.symbol_table.keys()), list(main.symbol_table.values()))
 
     regex['app_get'] = re.compile(r'' + re.escape(app_var) + r'\.get\((?:\'|\")(?P<endpoint_get>.+)(?:\'|\"),(.?)')
     regex['app_put'] = re.compile(r'' + re.escape(app_var) + r'\.put\((?:\'|\")(?P<endpoint_put>.+)(?:\'|\"),(.?)')
