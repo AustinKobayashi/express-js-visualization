@@ -9,7 +9,6 @@ def router_files(path):
         for line in file:
             if 'Router()' in line:
                 name = re.sub(r'\s?=(.+)|((var|let|const)\s)|\n', '', line)
-                print(name)
                 if path not in paths:
                     paths[path] = {}
 
