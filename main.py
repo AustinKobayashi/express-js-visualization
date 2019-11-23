@@ -31,8 +31,8 @@ def main():
 
     # This function must be passed the code for handler for the route
     # Right now it uses a dummy value: 'DatabaseBuilder.add_articles_to_database() ....'
-    route_subhandlers = functions_called_by_route_handler.get_sub_handler([], file_paths, '''DatabaseBuilder.add_articles_to_database(); 
-    res.end();''')
+    for handler in handler_finder.handlers:
+        route_subhandlers = functions_called_by_route_handler.get_sub_handler([], file_paths, handler)
     print(route_subhandlers)
 
 
