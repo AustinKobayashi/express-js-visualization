@@ -12,6 +12,10 @@ def generate_graph(nodes):
   color = ""
   output = ""
 
+  # remove existing graph
+  if path.exists("graph.png"):
+    os.remove("graph.png")
+
   for n in nodes:
     # set color
     if n["method"] == "GET":
@@ -78,7 +82,7 @@ def generate_graph(nodes):
 
     try:
       # external process call
-      subprocess.call(["python", "-m", "plantuml", str(counter) + ".txt"])
+      subprocess.call(["java", "-DPLANTUML_LIMIT_SIZE=8192", "-jar", "plantuml.jar", str(counter) + ".txt"])
 
       # merge images
       if path.exists("graph.png"):
@@ -104,6 +108,9 @@ def generate_graph(nodes):
     counter = counter + 1
 
   # remove generated files
-  for i in range(0, counter):
-    os.remove(str(i) + ".png")
-    #os.remove(m + ".txt")
+  try:
+    for i in range(0, counter):
+      os.remove(str(i) + ".png")
+      os.remove(str(i) + ".txt")
+  except:
+    print("Could not remove generated files")
