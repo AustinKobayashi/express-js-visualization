@@ -44,7 +44,8 @@ def generate_graph(nodes):
     codes = n["handler"]["code"].split('\n')
     for c in codes:
       if c != "":
-        output = output + n["handler"]["file"] + " : " + c + "\n"
+        new_c = c.replace("  ", "\\t")
+        output = output + n["handler"]["file"] + " : " + new_c + "\n"
 
     i = 1
     for sh in n["subhandlers"]:
@@ -53,7 +54,8 @@ def generate_graph(nodes):
       codes = sh["code"].split('\n')
       for c in codes:
         if c != "":
-          output = output + str(i) + "." + sh["file"] + " : " + c + "\n"
+          new_c = c.replace("  ", "\\t")
+          output = output + str(i) + "." + sh["file"] + " : " + new_c + "\n"
       i = i + 1
 
     # links
