@@ -19,56 +19,24 @@ def main():
         except FileNotFoundError:
             directory = input("Please enter the path to the directory to scan:\n").strip()
 
-    print(file_paths)
     endpoint_finder.get_routes(file_paths)
-    
-    
-    fake_handler = {
-        '/database/old': {
-            'methods': ['GET'],
-            'file_path': './ExampleServer/ExampleServer\\app.js',
-            'path_params': []
-        }
-    }
 
     data = []
 
     for key, value in endpoint_finder.endpoints.items():
-        
         for method_string in value['methods']:
             handler = handler_finder.get_handlers({'method': method_string, 'file_path': value['file_path'], 'route': key})
             route_subhandlers = functions_called_by_route_handler.get_sub_handler([], file_paths, handler['code'])
-
-    #print(symbol_table)
-    #print(endpoint_finder.endpoints)
-
-    #print(file_finder.paths)
-
-    fake_data = {
-        "endpoint": "/example/:user_id",
-        "method": "GET",
-        "params": ["user_id"],
-        "handler": {
-            "file": "Example.js",
-            "code": "console.log('Request to example!')"
-        },
-        "subhandlers": [
-            {
-                "file": "Backend.js",
-                "code": "console.log('Request to backend!')"
-            },
-            {
-                "file": "Database.js",
-                "code": "console.log('Request to database!')"
+            obj = {
+                'endpoint': key,
+                'method': method_string.capitalize(),
+                'params': value['params'],
+                'handler': handler,
+                'subhandlers': route_subhandlers
             }
-        ]
-    }
+            data.append(obj)
 
-    # change "file_path" to the path of app.js on your system
-
-    # This function must be passed the code for handler for the route
-    # Right now it uses a dummy value: 'DatabaseBuilder.add_articles_to_database() ....'
-    #print(route_subhandlers)
+    print(data)
 
 
 if __name__ == "__main__":
