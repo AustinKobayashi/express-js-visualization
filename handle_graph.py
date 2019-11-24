@@ -156,4 +156,4 @@ def test_graph():
   }
   generate_graph([get_data, post_data, delete_data])
 
-test_graph()
+#test_graph()
