@@ -56,8 +56,6 @@ def get_handler_code(route_obj):
     bracket_count = 0
     with open(route_obj['file_path'], 'r') as file:
 
-        file_finder.router_files(route_obj['file_path'])
-
         for line in file:
 
             key, match = parse_line(line)

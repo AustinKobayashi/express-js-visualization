@@ -39,8 +39,6 @@ def parse_line(line):
 
 def get_supported(file_path):
   with open(file_path, 'r') as file:
-
-    file_finder.router_files(file_path)
     
     for line in file:
 

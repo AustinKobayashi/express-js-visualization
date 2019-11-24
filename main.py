@@ -18,8 +18,11 @@ def main():
             valid = True
         except FileNotFoundError:
             directory = input("Please enter the path to the directory to scan:\n").strip()
+    
+    paths = file_finder.router_files(file_paths)
+    print(paths)
 
-    endpoint_finder.get_routes(file_paths)
+    endpoint_finder.get_routes(paths)
 
     data = []
 
