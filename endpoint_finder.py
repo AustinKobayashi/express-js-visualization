@@ -10,7 +10,7 @@ regex = {
 }
 # example key value pair
 # '/database': ['get', 'post']
-endpoints = defaultdict(list)
+endpoints = defaultdict(lambda: defaultdict(list))
 
 def get_routes(file_paths): 
   for file_path in file_paths:
@@ -40,7 +40,7 @@ def parse_line(line):
 def get_supported(file_path):
   with open(file_path, 'r') as file:
 
-    file_finder.router_files(file_path)
+    #file_finder.router_files(file_path)
     
     for line in file:
 
@@ -48,15 +48,20 @@ def get_supported(file_path):
 
       # extract endpoint string and respective HTTP method
       if key == 'app_get':
-        endpoints[match.group('endpoint_get')].append('get')
+        endpoints[match.group('endpoint_get')]['methods'].append('get')
+        endpoints[match.group('endpoint_get')]['file_path'] = file_path
       if key == 'app_put':
-        endpoints[match.group('endpoint_put')].append('put')
+        endpoints[match.group('endpoint_put')]['methods'].append('put')
+        endpoints[match.group('endpoint_put')]['file_path'] = file_path
       if key == 'app_post':
-        endpoints[match.group('endpoint_post')].append('post')
+        endpoints[match.group('endpoint_post')]['methods'].append('post')
+        endpoints[match.group('endpoint_post')]['file_path'] = file_path
       if key == 'app_delete':
-        endpoints[match.group('endpoint_delete')].append('delete')
+        endpoints[match.group('endpoint_delete')]['methods'].append('delete')
+        endpoints[match.group('endpoint_delete')]['file_path'] = file_path
       if key == 'app_patch':
-        endpoints[match.group('endpoint_delete')].append('delete')
+        endpoints[match.group('endpoint_patch')]['methods'].append('patch')
+        endpoints[match.group('endpoint_patch')]['file_path'] = file_path
 
 def add_symbol(file_path):
   with open(file_path, 'r') as file:
