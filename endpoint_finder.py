@@ -10,7 +10,7 @@ regex = {
 }
 # example key value pair
 # '/database': ['get', 'post']
-endpoints = defaultdict(list)
+endpoints = defaultdict(lambda: defaultdict(list))
 
 def get_routes(file_paths): 
   for file_path in file_paths:
