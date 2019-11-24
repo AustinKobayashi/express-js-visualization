@@ -2,6 +2,7 @@ import functions_called_by_route_handler
 import router_finder
 import endpoint_finder
 import file_finder
+import handle_graph
 import handler_finder
 
 # need to grab this dynamically (e.g. express() is not always assigned to 'app')
@@ -40,6 +41,7 @@ def main():
             routes.append(route)
 
     print(routes)
+    handle_graph.generate_graph(routes)
 
 
 if __name__ == "__main__":
