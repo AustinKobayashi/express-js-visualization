@@ -21,7 +21,10 @@ def main():
 
     print(file_paths)
     endpoint_finder.get_routes(file_paths)
-    handler_finder.get_handlers(file_paths)
+    
+    for key, object in endpoint_finder.endpoints:
+        for method_string in object.methods
+            handler = handler_finder.get_handlers({method: method_string, file_path: object.file_path, route: key})
     print(symbol_table)
     print(endpoint_finder.endpoints)
     print(handler_finder.handlers);
