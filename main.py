@@ -24,22 +24,22 @@ def main():
 
     endpoint_finder.get_routes(paths)
 
-    data = []
+    routes = []
 
     for key, value in endpoint_finder.endpoints.items():
         for method_string in value['methods']:
             handler = handler_finder.get_handlers({'method': method_string, 'file_path': value['file_path'], 'route': key})
             route_subhandlers = functions_called_by_route_handler.get_sub_handler([], file_paths, handler['code'])
-            obj = {
+            route = {
                 'endpoint': key,
-                'method': method_string.capitalize(),
+                'method': method_string.upper(),
                 'params': value['params'],
                 'handler': handler,
                 'subhandlers': route_subhandlers
             }
-            data.append(obj)
+            routes.append(route)
 
-    print(data)
+    print(routes)
 
 
 if __name__ == "__main__":
