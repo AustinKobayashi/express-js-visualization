@@ -22,14 +22,24 @@ def main():
     print(file_paths)
     endpoint_finder.get_routes(file_paths)
     
+    
+    fake_handler = {
+        '/database/old': {
+            'methods': ['GET'],
+            'file_path': './ExampleServer/ExampleServer\\app.js',
+            'path_params': []
+        }
+    }
+    
     for key, object in endpoint_finder.endpoints:
-        for method_string in object.methods
+        for method_string in object.methods:
             handler = handler_finder.get_handlers({method: method_string, file_path: object.file_path, route: key})
-    print(symbol_table)
-    print(endpoint_finder.endpoints)
-    print(handler_finder.handlers);
+            print(handler)
+            route_subhandlers = functions_called_by_route_handler.get_sub_handler([], file_paths, handler.code)
+    #print(symbol_table)
+    #print(endpoint_finder.endpoints)
 
-    print(file_finder.paths)
+    #print(file_finder.paths)
 
     fake_data = {
         "endpoint": "/example/:user_id",
@@ -52,19 +62,10 @@ def main():
     }
 
     # change "file_path" to the path of app.js on your system
-    fake_handler = {
-        '/database/old': {
-            'methods': ['GET'],
-            'file_path': '/Users/Austin/Desktop/School/cs410/express-js-visualization/ExampleServer/app.js',
-            'path_params': []
-        }
-    }
 
     # This function must be passed the code for handler for the route
     # Right now it uses a dummy value: 'DatabaseBuilder.add_articles_to_database() ....'
-    for handler in handler_finder.handlers:
-        route_subhandlers = functions_called_by_route_handler.get_sub_handler([], file_paths, handler)
-    print(route_subhandlers)
+    #print(route_subhandlers)
 
 
 if __name__ == "__main__":
