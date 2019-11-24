@@ -30,12 +30,15 @@ def main():
             'path_params': []
         }
     }
-    
+
+    data = []
+
     for key, value in endpoint_finder.endpoints.items():
+        
         for method_string in value['methods']:
             handler = handler_finder.get_handlers({'method': method_string, 'file_path': value['file_path'], 'route': key})
-            print(handler)
-            route_subhandlers = functions_called_by_route_handler.get_sub_handler([], file_paths, handler.code)
+            route_subhandlers = functions_called_by_route_handler.get_sub_handler([], file_paths, handler['code'])
+
     #print(symbol_table)
     #print(endpoint_finder.endpoints)
 

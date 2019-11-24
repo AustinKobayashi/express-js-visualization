@@ -10,7 +10,7 @@ regex = {}
 
 
 def get_handlers(route_obj):
-    build_regex(route_obj.method, route_obj.route)
+    build_regex(route_obj['method'], route_obj['route'])
     return get_handler_code(route_obj)
 
 
@@ -54,9 +54,9 @@ def get_handler_code(route_obj):
     counting_brackets = False
     cumulative_string = ""
     bracket_count = 0
-    with open(route_obj.file_path, 'r') as file:
+    with open(route_obj['file_path'], 'r') as file:
 
-        file_finder.router_files(route_obj.file_path)
+        file_finder.router_files(route_obj['file_path'])
 
         for line in file:
 
@@ -66,7 +66,7 @@ def get_handler_code(route_obj):
                 bracket_count += line.count("{") - line.count("}")
                 if bracket_count == 0:
                     counting_brackets = False
-                    return {"file": remove_garbage_from_path(route_obj.file_path), "code": cumulative_string}
+                    return {"file": remove_garbage_from_path(route_obj['file_path']), "code": cumulative_string}
                 else:
                     cumulative_string += line
 
