@@ -48,6 +48,15 @@ def main():
         ]
     }
 
+    # change "file_path" to the path of app.js on your system
+    fake_handler = {
+        '/database/old': {
+            'methods': ['GET'],
+            'file_path': '/Users/Austin/Desktop/School/cs410/express-js-visualization/ExampleServer/app.js',
+            'path_params': []
+        }
+    }
+
     # This function must be passed the code for handler for the route
     # Right now it uses a dummy value: 'DatabaseBuilder.add_articles_to_database() ....'
     for handler in handler_finder.handlers:
