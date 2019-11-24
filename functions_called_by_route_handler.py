@@ -54,7 +54,7 @@ def get_sub_handler(found, file_paths, parent_handler):
                 file_text = file_text[:end_index]
                 file_text = file_text[file_text.index('{') + 1: file_text.rindex('}')]
                 found.append(function_name)
-                handlers[function_name] = file_text
+                handlers[function_name] = {"file": file, "handler": file_text}
 
                 sub_handlers = get_sub_handler(found, file_paths, file_text)
                 handlers = merge_two_dicts(handlers, sub_handlers)
