@@ -21,7 +21,7 @@ def main():
             directory = input("Please enter the path to the directory to scan:\n").strip()
     
     paths = file_finder.router_files(file_paths)
-    print(paths)
+    #print(paths)
 
     endpoint_finder.get_routes(paths)
 
@@ -40,7 +40,7 @@ def main():
             }
             routes.append(route)
 
-    print(routes)
+    #print(routes)
     handle_graph.generate_graph(routes)
 
 
