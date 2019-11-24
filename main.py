@@ -28,6 +28,25 @@ def main():
 
     print(file_finder.paths)
 
+    fake_data = {
+        "endpoint": "/example/:user_id",
+        "method": "GET",
+        "params": ["user_id"],
+        "handler": {
+            "file": "Example.js",
+            "code": "console.log('Request to example!')"
+        },
+        "subhandlers": [
+            {
+                "file": "Backend.js",
+                "code": "console.log('Request to backend!')"
+            },
+            {
+                "file": "Database.js",
+                "code": "console.log('Request to database!')"
+            }
+        ]
+    }
 
     # This function must be passed the code for handler for the route
     # Right now it uses a dummy value: 'DatabaseBuilder.add_articles_to_database() ....'

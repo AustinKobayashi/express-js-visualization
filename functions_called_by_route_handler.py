@@ -1,4 +1,5 @@
 import re
+import os
 
 reserved = ['forEach', 'then', 'push', 'toJSON', 'log', 'on', 'eachSeries', 'setTimeout', 'sleep', 'get',
             'post', 'put', 'delete', 'warn', 'error', 'split', 'join', 'dir']
@@ -11,7 +12,7 @@ def is_reserved(word):
 
 
 def get_sub_handler(found, file_paths, parent_handler):
-    handlers = {}
+    handlers = []
 
     functions = re.findall("\.[^().;]+\(.*\)\s*[.;]", parent_handler)
 
@@ -36,6 +37,7 @@ def get_sub_handler(found, file_paths, parent_handler):
 
             if re.search(function_name + '\s*\([^();:\'"]*\)\s*{', file_text):
                 index = re.search(function_name + '\s*\([^();:\'"]*\)\s*{', file_text).start()
+                full_func_name = re.search(function_name + '\s*\([^();:\'"]*\)\s*{', file_text).group(0)
                 file_text = file_text[index:]
                 open_brackets = 0
                 closing_brackets = 0
@@ -53,16 +55,14 @@ def get_sub_handler(found, file_paths, parent_handler):
 
                 file_text = file_text[:end_index]
                 file_text = file_text[file_text.index('{') + 1: file_text.rindex('}')]
+                file_text = full_func_name + '\n' + file_text + '}'
                 found.append(function_name)
-                handlers[function_name] = {"file": file, "handler": file_text}
+
+                file_name = file[file.rindex(os.path.sep) + 1:]
+                handlers.append({"file": file_name, "code": file_text})
 
                 sub_handlers = get_sub_handler(found, file_paths, file_text)
-                handlers = merge_two_dicts(handlers, sub_handlers)
+                handlers = handlers + sub_handlers
 
     return handlers
 
-
-def merge_two_dicts(dict1, dict2):
-    merged = dict1.copy()
-    merged.update(dict2)
-    return merged
