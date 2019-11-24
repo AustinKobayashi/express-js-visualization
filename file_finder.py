@@ -11,5 +11,4 @@ def router_files(file_paths):
                 match = rx.search(line)
                 if match and path not in paths:
                     paths.append(path)
-    print(paths)
     return paths
