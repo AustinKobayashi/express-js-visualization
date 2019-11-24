@@ -86,7 +86,7 @@ def generate_graph(nodes):
 
       # merge images
       if path.exists("graph.png"):
-        imgs = [Image.open(m + ".png") for m in ["graph", str(counter)]]
+        imgs = [Image.open(img) for img in ["graph.png", str(counter) + ".png"]]
       else:
         imgs = [Image.open(str(counter) + ".png")]
       widths, heights = zip(*(i.size for i in imgs))
