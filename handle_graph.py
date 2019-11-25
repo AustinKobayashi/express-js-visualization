@@ -67,6 +67,7 @@ def generate_graph(nodes):
 
     # links
     output = output + "\n"
+    print(n["handler"]["body"])
     if len(n["params"]) != 0:
       output = output + n["method"] + " -> Params\n"
     elif len(n["handler"]["body"]) != 0:
@@ -74,10 +75,12 @@ def generate_graph(nodes):
     else:
       output = output + n["method"] + " -> " + n["handler"]["file"] + "\n"
 
-    if len(n["params"]) != 0 & len(n["handler"]["body"]) != 0:
+    if len(n["params"]) != 0 and len(n["handler"]["body"]) != 0:
       output = output + "Params -> Body\n"
+      print('body')
     elif len(n["params"]) != 0 & len(n["handler"]["body"]) == 0:
       output = output + "Params -> " + n["handler"]["file"] + "\n"
+      print('cont')
 
     if len(n["handler"]["body"]) != 0:
       output = output + "Body -> " + n["handler"]["file"] + "\n"
