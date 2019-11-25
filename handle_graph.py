@@ -104,6 +104,7 @@ def generate_graph(nodes):
         y_offset += i.size[1]
 
       new_img.save('graph.png')
+
     except:
       print("Could not generate graph for " + n["method"])
 
@@ -116,3 +117,7 @@ def generate_graph(nodes):
       os.remove(str(i) + ".txt")
   except:
     print("Could not remove generated files")
+
+  graph = Image.open('graph.png')
+  graph.show()
+
