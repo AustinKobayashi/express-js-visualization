@@ -10,7 +10,7 @@ symbol_table = dict()
 
 
 def main():
-    directory = raw_input("Please enter the path to the directory to scan:\n").strip()
+    directory = input("Please enter the path to the directory to scan:\n").strip()
     valid = False
     file_paths = []
     while not valid:
@@ -18,7 +18,7 @@ def main():
             file_paths = router_finder.get_js_files(directory)
             valid = True
         except:
-            directory = raw_input("Please enter the path to the directory to scan:\n").strip()
+            directory = input("Please enter the path to the directory to scan:\n").strip()
     
     paths = file_finder.router_files(file_paths)
     #print(paths)

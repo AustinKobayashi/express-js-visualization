@@ -34,15 +34,17 @@ def generate_graph(nodes):
     output = output + "object " + n["method"] + color + "\n"
     output = output + n["method"] + " : " + n["endpoint"] + "\n"
 
-    output = output + "\n"
-    output = output + "object Params" + color + "\n"
-    for param in n["params"]:
-      output = output + "Params : " + param + "\n"
+    if len(n["params"]) != 0:
+      output = output + "\n"
+      output = output + "object Params" + color + "\n"
+      for param in n["params"]:
+        output = output + "Params : " + param + "\n"
 
-    output = output + "\n"
-    output = output + "object Body" + color + "\n"
-    for b in n["handler"]["body"]:
-      output = output + "Body : " + b + "\n"
+    if len(n["handler"]["body"]) != 0:
+      output = output + "\n"
+      output = output + "object Body" + color + "\n"
+      for b in n["handler"]["body"]:
+        output = output + "Body : " + b + "\n"
 
     output = output + "\n"
     output = output + "object " + n["handler"]["file"] + color + "\n"
@@ -65,9 +67,16 @@ def generate_graph(nodes):
 
     # links
     output = output + "\n"
-    output = output + n["method"] + " -> Params\n"
-    output = output + "Params -> Body\n"
-    output = output + "Body -> " + n["handler"]["file"] + "\n"
+    if len(n["params"]) != 0:
+      output = output + n["method"] + " -> Params\n"
+    elif len(n["handler"]["body"]) != 0:
+      output = output + n["method"] + " -> Body\n"
+    else:
+      output = output + n["method"] + " -> " + n["handler"]["file"] + "\n"
+    if len(n["params"]) != 0:
+      output = output + "Params -> Body\n"
+    if len(n["handler"]["body"]) != 0:
+      output = output + "Body -> " + n["handler"]["file"] + "\n"
     if len(n["subhandlers"]) != 0:
       output = output + n["handler"]["file"] + " -> 1." + n["subhandlers"][0]["file"] + "\n"
 
