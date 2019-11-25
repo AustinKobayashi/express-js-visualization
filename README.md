@@ -16,7 +16,7 @@ We are designing a visualization tool for web developers to easily see what rout
 
 ### What are the kinds of analysis that you are using to produce the visualisation?
 
-We will be doing static analysis on the codebase to produce the graph.
+We will be doing static syntactic analysis on the codebase to produce the graph.
 
 
 ### Who is doing which part? Everyone must own either a visualisation or analysis piece.
