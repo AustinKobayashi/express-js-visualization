@@ -55,16 +55,25 @@ def get_handler_code(route_obj):
     cumulative_string = ""
     bracket_count = 0
     with open(route_obj['file_path'], 'r') as file:
+        body = []
 
         for line in file:
 
             key, match = parse_line(line)
 
             if counting_brackets:
+
+                rx = re.compile(r'req\.body\.[\w_\d]+')
+                trim = 'req.body.'
+                bodyResults = rx.findall(line)
+                for result in bodyResults:
+                    toAdd = result[len(trim):]
+                    body.append(toAdd)
+                    
                 bracket_count += line.count("{") - line.count("}")
                 if bracket_count == 0:
                     counting_brackets = False
-                    return {"file": remove_garbage_from_path(route_obj['file_path']), "code": cumulative_string}
+                    return {"file": remove_garbage_from_path(route_obj['file_path']), "code": cumulative_string, "body": body}
                 else:
                     cumulative_string += line
 
