@@ -30,10 +30,10 @@ We will be doing static analysis on the codebase to produce the graph.
 
 ### What user studies do you have planned, and for when?
 
-**Study 1:**
+**Study 1:**<br>
 We tasked our user with creating a POST request to add a user to the database and creating a GET request to check if the user was properly added. The user was provided only the server codebase. Our study showed that the user spent a while reading through the code before beginning to create the requests. They had to look at each file to ensure that they knew where every method was. While writing the requests, they often switched back to the code to ensure that the requests were properly formatted.
 
-**Study 2:**
+**Study 2:**<br>
 We tasked our user with creating the following HTTP requests:
 
 - Create a post request for a sign-up form
