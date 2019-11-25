@@ -68,7 +68,8 @@ def get_handler_code(route_obj):
                 bodyResults = rx.findall(line)
                 for result in bodyResults:
                     toAdd = result[len(trim):]
-                    body.append(toAdd)
+                    if toAdd not in body:
+                        body.append(toAdd)
                     
                 bracket_count += line.count("{") - line.count("}")
                 if bracket_count == 0:
