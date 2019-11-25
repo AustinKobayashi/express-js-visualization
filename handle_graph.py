@@ -73,8 +73,10 @@ def generate_graph(nodes):
       output = output + n["method"] + " -> Body\n"
     else:
       output = output + n["method"] + " -> " + n["handler"]["file"] + "\n"
-    if len(n["params"]) != 0:
+    if len(n["params"]) != 0 & len(n["handler"]["body"]) != 0:
       output = output + "Params -> Body\n"
+    elif len(n["params"]) != 0:
+      output = output + "Params -> " + n["handler"]["file"] + "\n"
     if len(n["handler"]["body"]) != 0:
       output = output + "Body -> " + n["handler"]["file"] + "\n"
     if len(n["subhandlers"]) != 0:
