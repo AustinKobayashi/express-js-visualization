@@ -1,7 +1,7 @@
 
 # Express.js Visualization Tool
 
-## Required graphing program
+## Required program
 - Python version 3.6.x via [Anaconda 3](https://www.anaconda.com/distribution/)
 - [Graphviz 2.26.3+](https://www.graphviz.org/download/)
 
