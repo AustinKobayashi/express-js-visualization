@@ -40,6 +40,11 @@ def generate_graph(nodes):
       output = output + "Params : " + param + "\n"
 
     output = output + "\n"
+    output = output + "object Body" + color + "\n"
+    for b in n["handler"]["body"]:
+      output = output + "Body : " + b + "\n"
+
+    output = output + "\n"
     output = output + "object " + n["handler"]["file"] + color + "\n"
     codes = n["handler"]["code"].split('\n')
     for c in codes:
@@ -61,7 +66,8 @@ def generate_graph(nodes):
     # links
     output = output + "\n"
     output = output + n["method"] + " -> Params\n"
-    output = output + "Params -> " + n["handler"]["file"] + "\n"
+    output = output + "Params -> Body\n"
+    output = output + "Body -> " + n["handler"]["file"] + "\n"
     if len(n["subhandlers"]) != 0:
       output = output + n["handler"]["file"] + " -> 1." + n["subhandlers"][0]["file"] + "\n"
 
@@ -121,3 +127,4 @@ def generate_graph(nodes):
   graph = Image.open('graph.png')
   graph.show()
 
+  print("Done")
