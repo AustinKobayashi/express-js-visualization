@@ -11,3 +11,5 @@ ExampleServer/node_modules/
 ExampleServer
 
 .DS_Store
+
+*.pyc

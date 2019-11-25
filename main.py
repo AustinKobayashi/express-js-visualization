@@ -10,15 +10,15 @@ symbol_table = dict()
 
 
 def main():
-    directory = input("Please enter the path to the directory to scan:\n").strip()
+    directory = raw_input("Please enter the path to the directory to scan:\n").strip()
     valid = False
     file_paths = []
     while not valid:
         try:
             file_paths = router_finder.get_js_files(directory)
             valid = True
-        except FileNotFoundError:
-            directory = input("Please enter the path to the directory to scan:\n").strip()
+        except:
+            directory = raw_input("Please enter the path to the directory to scan:\n").strip()
     
     paths = file_finder.router_files(file_paths)
     #print(paths)
