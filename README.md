@@ -15,7 +15,7 @@ We designed a visualization tool for web developers to easily see what routes a 
 
 
 ### What is the visualisation you are providing? Provide a sketch.
-
+![Output](https://github.com/AustinKobayashi/express-js-visualization/blob/master/example.png)
 
 ### What are the kinds of analysis that you are using to produce the visualisation?
 Our tool completes a static syntactic analysis on the codebase to produce the graph.
